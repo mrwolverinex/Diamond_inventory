@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DiamondInventory.Models.WorkerType>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>WorkType</h2>
+
+@Html.ActionLink("Add New WorkType", "Create", "WorkerType", null, new { @class = "btn btn-primary btn-sm" })
+<br />
+<div class="card">
+    <div class="card-body table-responsive">
+        <table class="table table-bordered table-striped table-responsive">
+
+            <tr style="font-weight: bold;">
+
+                <th>
+                    @Html.DisplayNameFor(model => model.TypeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th style="width: 23%; ">Action</th>
+            <tr />
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { wid = item.WorkTypeID }, new { @class = "btn btn-info btn-sm" })
+
+                        @Html.ActionLink("Delete", "Delete", new { wid = item.WorkTypeID }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

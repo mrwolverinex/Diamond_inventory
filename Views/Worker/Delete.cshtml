@@ -1,0 +1,89 @@
+﻿@model DiamondInventory.Models.Worker
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4></h4>
+    <hr />
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<dl class="dl-horizontal" style="color: #286090;">
+
+    <dd>
+        @Html.HiddenFor(model => model.WorkerId)
+    </dd>
+
+
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Workername)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Workername)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.MobileNo)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.MobileNo)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.WorkType)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.WorkType)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.WorkPrice)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.WorkPrice)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Address)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Address)
+    </dd>
+    <dd>
+        @Html.DisplayFor(model => model.State)
+    </dd>
+    <dd>
+        @Html.DisplayFor(model => model.Country)
+    </dd>
+    <dd>
+        @Html.DisplayFor(model => model.BloodGroup)
+    </dd>
+    <dd>
+        @Html.DisplayFor(model => model.JoiningDate)
+    </dd>
+</dl>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" new{ class="btn btn-info btn"}  /> |
+            @Html.ActionLink("Back To List", "Index", null, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
+</div>
+

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DiamondInventory.Models.Dailywork_list>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dailywork</h2>
+@Html.ActionLink("Add New Dailywork", "Create", "Dailywork", null, new { @class = "btn btn-primary btn-sm" })
+<br />
+<br />
+<div class="card">
+    <div class="card-body table-responsive">
+
+        <table class="table table-bordered table-striped table-responsive">
+            <tr style="font-weight: bold;">
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Work)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Work_Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.price)
+                </th>
+
+
+                <th style="width: 23%; ">Action</th>
+            <tr />
+
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    @*<td class="hidden">
+                            @Html.DisplayFor(modelItem => item.DailyworkID)
+                        </td>
+                        <td class="hidden">
+                            @Html.DisplayFor(modelItem => item.WorkerID)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Work)
+                    </td>
+                    <td>
+                        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Work_Date))
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { wid = item.DailyworkID }, new { @class = "btn btn-info btn-sm" })
+
+                        @Html.ActionLink("Delete", "Delete", new { wid = item.DailyworkID }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

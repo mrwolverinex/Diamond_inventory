@@ -1,0 +1,69 @@
+﻿@model DiamondInventory.Models.Dailywork
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+@using (Html.BeginForm("Create", "Dailywork", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="color: #337ab7;">
+        @*<h4>Add_Worker </h4>*@
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WorkerID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.WorkerID, new SelectList(ViewBag.Workers, "Text", "value"), new { @class = "form-control" })
+
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Work, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Work, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Work, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Work_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*<input type="date" class="form-control" name="Work_Date" id="Work_Date" required />*@
+                @Html.EditorFor(model => model.Work_Date, new { htmlAttributes = new {@type="Date", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Work_Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-info btn" />
+            </div>
+        </div>
+    </div>
+
+
+    @*<script type="text/javascript">
+            $(function () {
+                $('#JoiningDate').datetimepicker();
+                dateFormat: "dd-MM-yyyy"
+            });
+        </script>*@
+}
+
+<div>
+    @Html.ActionLink("Back To List", "Index", "Dailywork", null, new { @class = "btn btn-primary btn-sm" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

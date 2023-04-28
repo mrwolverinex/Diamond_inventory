@@ -1,0 +1,161 @@
+﻿@model IEnumerable<DiamondInventory.Models.ReportVM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div class="card">
+    <div class="card-body table-responsive">
+        <div class="row">
+            @using (Html.BeginForm("Index", "Report", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        <td></td>
+                        <td><label>Start Date:</label></td>
+                        <td><input type="date" class="form-control" id="StartDate" name="StartDate"></td>
+                        <td> <label>End Date:</label></td>
+                        <td><input type="Date" class="form-control" id="EndDate" name="EndDate"></td>
+                        <td><button type="submit" class="btn btn" value="search" style="background-color: #FF9F43;">Search</button></td>
+                    </tr>
+                </table>
+
+                <iframe id="txtArea1" style="display:none"></iframe>
+
+                <button id="btnExport" onclick="fnExcelReport();"> EXPORT </button>
+            }
+
+        </div>
+
+        <br />
+        <br />
+        <table class="table table-bordered table-striped table-responsive" id="tab_text">
+            <tr style="font-weight: bold;">
+                <th>
+                    @Html.DisplayNameFor(model => model.qty)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Work_Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Workprice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MobileNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodGroup)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.price)
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.qty)
+            </td>
+            <td>
+                @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Work_Date))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Workprice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodGroup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+
+        </tr>
+            }
+        </table>
+
+    </div>
+</div>
+
+<script>
+    function fnExcelReport() {
+        debugger;
+        var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+        var textRange; var j = 0;
+        tab = document.getElementById('tab_text'); // id of table
+
+        for (j = 0; j < tab.rows.length; j++) {
+            tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+            //tab_text=tab_text+"</tr>";
+        }
+
+        tab_text = tab_text + "</table>";
+        tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+        tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+        tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+        {
+            txtArea1.document.open("txt/html", "replace");
+            txtArea1.document.write(tab_text);
+            txtArea1.document.close();
+            txtArea1.focus();
+            sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+        }
+        else                 //other browser not tested on IE 11
+            sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+        return (sa);
+    }
+</script>

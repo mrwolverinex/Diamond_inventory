@@ -1,0 +1,47 @@
+﻿@model DiamondInventory.Models.WorkerType
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4></h4>
+    <hr />
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<dl class="dl-horizontal" style="color: #286090;">
+
+    <dd>
+        @Html.HiddenFor(model => model.WorkTypeID)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.TypeName)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.TypeName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Price)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Price)
+    </dd>
+
+
+</dl>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" new{ class="btn btn-info btn" } /> |
+            @Html.ActionLink("Back To List", "Index", "WorkerType", null ,new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
+</div>
